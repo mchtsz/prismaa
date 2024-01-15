@@ -4,16 +4,18 @@ import crypto from "crypto";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
-  console.log(body);
-
   const sha256 = crypto.createHash("sha256");
-  const createPassword = sha256.update(body.password).digest("hex");
 
-  return await prisma.user.create({
-    data: {
-      name: body.name,
+  const passwordHash = sha256.update(body.password).digest("hex");
+
+  const loginUser = await prisma.user.findUnique({
+    where: {
       email: body.email,
-      password: createPassword,
     },
   });
+
+  if (!loginUser) return 404;
+  else if (loginUser.password !== passwordHash) return 401;
+
+  return loginUser;
 });

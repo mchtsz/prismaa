@@ -3,9 +3,6 @@ import crypto from "crypto";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-
-  console.log(body);
-
   const sha256 = crypto.createHash("sha256");
   const createPassword = sha256.update(body.password).digest("hex");
 
@@ -14,6 +11,7 @@ export default defineEventHandler(async (event) => {
       name: body.name,
       email: body.email,
       password: createPassword,
+      admin: body.admin
     },
   });
 });

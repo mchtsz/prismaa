@@ -15,6 +15,7 @@ async function register() {
         }
     }).then((res) => {
         console.log(res)
+        window.location.href = "/login"
     })
 }
 </script>
