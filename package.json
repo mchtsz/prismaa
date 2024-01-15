@@ -1,0 +1,24 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "cls && nuxt dev",
+    "deploy": "npx prisma db push",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "nuxt": "^3.9.1",
+    "prisma": "^5.8.0",
+    "sass": "^1.69.7",
+    "sass-loader": "^13.3.3",
+    "vue": "^3.4.10",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.8.0"
+  }
+}
