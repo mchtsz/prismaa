@@ -23,3 +23,35 @@ nav {
     display: flex;
     width: 100%;
 }
+
+form {
+    height: 80vh;
+    gap: .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input {
+    background-color: #ccc;
+    transition: 0.2s ease-in-out;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 500;
+
+    &:hover {
+        border: 1px solid #fff;
+        transform: scale(1.05);
+    }
+
+    &[type="submit"] {
+        color: #000;
+        font-weight: 700;
+        cursor: pointer;
+    }
+}

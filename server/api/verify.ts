@@ -1,15 +1,14 @@
 import { prisma } from "../prisma"
 
 export default defineEventHandler(async(event) => {
-    const token:any = window.localStorage.getItem("token");
+  const token = getCookie(event, "token")
+  const user = await prisma.user.findUnique({
+    where: {
+      token: token,
+    },
+  });
 
-    const user = await prisma.user.findUnique({
-      where: {
-        id: parseInt(token),
-      },
-    });
-  
-    if (!user) return 404;
-  
-    return user;
+  if (!user) return 401;
+
+  return user;
 })

@@ -18,13 +18,20 @@ async function register() {
         window.location.href = "/login"
     })
 }
+
+const onSubmit = (event: Event) => {
+    event.preventDefault();
+    register();
+};
 </script>
 
 <template>
-    <input type="text" v-model="name" placeholder="Name">
-    <input type="email" v-model="email" placeholder="Email">
-    <input type="password" v-model="password" placeholder="Password">
-    <input type="submit" @click="register" value="Register">
+    <form @submit="onSubmit">
+        <input type="text" v-model="name" placeholder="Name">
+        <input type="text" v-model="email" placeholder="Email">
+        <input type="password" v-model="password" placeholder="Password">
+        <input type="submit" @click="register" value="Register">
+    </form>
 </template>
 
 <style scoped lang=scss></style>

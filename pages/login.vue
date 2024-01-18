@@ -1,25 +1,35 @@
-<script setup lang=ts>
-const email = ref("")
-const password = ref("")
+<script setup lang="ts">
+const email = ref("");
+const password = ref("");
 
-async function login() {
-    $fetch("/api/login", {
+const login = async () => {
+    const user = await $fetch("/api/login", {
         method: "POST",
         body: {
             email: email.value,
             password: password.value
         }
-    }).then((res) => {
-        console.log(res)
-        window.location.href = "/dashboard"
     })
-}
+
+    if (typeof user == "number") {
+        return
+    }
+
+    navigateTo("/")
+};
+
+const onSubmit = (event: Event) => {
+    event.preventDefault();
+    login();
+};
 </script>
 
 <template>
-    <input type="email" v-model="email" placeholder="Email">
-    <input type="password" v-model="password" placeholder="Password">
-    <input type="submit" @click="login" value="Register">
+    <form @submit="onSubmit">
+        <input type="text" v-model="email" placeholder="Email">
+        <input type="password" v-model="password" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
 </template>
 
-<style scoped lang=scss></style>
+<style scoped lang="scss"></style>
